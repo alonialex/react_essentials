@@ -1,5 +1,5 @@
 import './App.css'
-import { useReducer } from 'react'
+import { useRef } from 'react'
 
 
 // const cities = ["Tokyo","Nirobi","Asmara"]
@@ -9,13 +9,30 @@ import { useReducer } from 'react'
 
 
 function App() {
-  const[checked,setChecked] = useReducer((checked) => !checked)
-  console.log(checked)
+const txtTitle = useRef()
+const hexColor = useRef()
+
+const submit = (e) =>{
+  e.preventDefault()
+  console.log(txtTitle)
+  const title= txtTitle.current.value;
+  const color = hexColor.current.value;
+  alert(`${title}, ${color}`)
+  txtTitle.current.value=""
+  hexColor.current.value=""
+
+}
 
   return (
     <>
-    <input type="checkbox" value={checked} onChange={setChecked}/>
-    <label htmlFor="">{checked ? "checked" : "not checked"}</label>
+    <form onSubmit={submit}> 
+      <input  ref={txtTitle} type="text" />
+      <input ref={hexColor} type="color" />
+      <button>ADD</button>
+    </form>
+
+    
+    
 
 
     </> 
